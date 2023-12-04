@@ -21,6 +21,7 @@ struct Taxi {
 
 //void addTripCar() 1
 void addTripCar(){
+
 struct Taxi *head = NULL , *current ; 
 FILE* fp;
 fp = fopen("Taxies.txt", "r");
@@ -32,7 +33,9 @@ int c;
 while ((c = getc(fp)) != EOF) 
 if( c == '\n' ) numOfLines++;
 fclose(fp);
+
 //#############
+
 FILE* ff;
 ff = fopen("Taxies.txt", "r"); if( ff == NULL)
 return ;
@@ -53,8 +56,10 @@ else
 {
 current->next = temp ; current = current->next ; }
 }// end for
+
 list = head ;
 fclose(ff);
+
 }
 //______________________________________________________________________
 
