@@ -104,7 +104,7 @@ int main() {
 
     // Call the function addTripCar to read the content  of the given text file: “Taxies.txt”, 
     addTripCar();
-     printf("The Available Trip cars:\n");
+    printf("The Available Trip cars:\n");
     printList();
     printf("--------------------------------------------------------------------------------------------------------------\n");
 
@@ -113,7 +113,7 @@ int main() {
     char *Categorys[]={"Business","Family","Family","standard","standard"};
     float rates[] = {4.5,5.0,4.0,3.4,5.0};
     for( i = 0 ; i < 5 ; i++)
-        setTripCar(*(Categorys+i),(rates+i));
+    setTripCar(*(Categorys+i),(rates+i));
 
     // Call the function writeCarsInRide to update the txt file with cars in trip.
     char *fileName ="Taxies.txt";
