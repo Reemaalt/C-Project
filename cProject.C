@@ -88,19 +88,59 @@ current = current->next ;
 
 //void writeCarsInRide (char* fileName) 3
 
+void writeCarsInRide (char* fileName){ 
+    if(list == NULL){
+        printf("List is empty\n");
+        return;
+    }
+
+    FILE *fp = fopen(fileName,"a");
+    if(fp == NULL){
+        perror("Error opening file\n");
+        return;
+    }
+
+    fprintf(fp,"\n--------------------------------------------------------------------------------------------------------------\nThe Car in Ride:\n");
+    fprintf(fp, "%-3s\t%-6s\t%-8s\t%-6s\t%-3s\t%-1s\n", "id", "driver", "category","plate", "rate","state" );
+    struct Taxi *temp;
+    temp = list;
+
+    while(temp != NULL){
+        if(temp->state == 'R'){
+            fprintf(fp,"%-3d\t%-6s\t%-8s\t%-6s\t%-.1f\t%c\n",temp->id,temp->driver,temp->category,temp->plate,temp->rate,temp->state);
+        }
+        temp = temp->next;
+    }
+
+    if(fclose(fp) != 0)
+    perror("Error closing file\n");
+}
+
 //______________________________________________________________________
 
 
 //printList() 4
+
+void printList(){
+    if(list == NULL){
+        printf("List is empty\n");
+        return;
+    }
+
+    struct Taxi *temp ;
+    temp = list;
+
+    while(temp != NULL){
+        printf("%-3d\t%-6s\t%-8s\t%-6s\t%-.1f\t%-.2f\t%c\n",(temp->id),temp->driver,temp->category,temp->plate,(temp->rate),(temp->minCharge),temp->state);
+        temp = temp->next;
+    }
+}
 
 //______________________________________________________________________
 
 
 
 int main() {
-   
-
-    
 
     // Call the function addTripCar to read the content  of the given text file: “Taxies.txt”, 
     addTripCar();
