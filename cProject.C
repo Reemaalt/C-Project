@@ -13,6 +13,58 @@ struct Taxi {
     struct Taxi* next; // Self-referential 
 };
 
+struct Taxi *list = NULL ;
+void addTripCar(){
+struct Taxi *head = NULL , *current ; FILE* fp;
+fp = fopen("Taxies.txt", "r");
+if( fp == NULL)
+return ;
+int numOfLines = 0 ;
+int c;
+while ((c = getc(fp)) != EOF) if( c == '\n' ) numOfLines++;
+fclose(fp);
+//#############
+FILE* ff;
+ff = fopen("Taxies.txt", "r"); if( ff == NULL)
+return ;
+int cc;
+while ((cc = getc(ff)) != '\n');// to ignore the header line in file
+int i ;
+for( i=0;i<numOfLines-1;i++){
+struct Taxi *temp = (struct Taxi *) malloc(sizeof(struct Taxi)); fscanf(ff, "%d %s %s %s %s %f %f ", &(temp->id) , temp->driver , temp->category , temp->plate , temp->color , &(temp->rate) , &(temp- >minCharge) );
+temp->state = 'A' ;
+temp->next = NULL;
+if( head == NULL)
+{
+head = temp ;
+current = head ;
+}
+else
+{
+current->next = temp ; current = current->next ; }
+}// end for
+list = head ;
+fclose(ff);
+}
+//###########
+void setTripCar(char *category , float *rate) {
+if( list == NULL)
+{
+printf("empty list\n"); return ;
+}
+struct Taxi *current  ;
+current = list ;
+while( current != NULL){
+if( strcmp( current->category , category ) == 0 && current->rate
+== *rate) {
+current->state = 'R' ;
+return ; // out of method ( because we want to set first one only)
+}
+current = current->next ;
+}
+
+}
+
 //void addTripCar() 1
 
 //void setTripCar (char* category, float* rate) 2
