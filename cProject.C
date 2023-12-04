@@ -1,4 +1,7 @@
-#include <stdio.h>
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<errno.h>
 
 // Define the Taxi structure
 struct Taxi {
@@ -17,13 +20,16 @@ struct Taxi {
 
 //void addTripCar() 1
 void addTripCar(){
-struct Taxi *head = NULL , *current ; FILE* fp;
+struct Taxi *head = NULL , *current ; 
+FILE* fp;
 fp = fopen("Taxies.txt", "r");
 if( fp == NULL)
+//perror("Error opening file\n");
 return ;
 int numOfLines = 0 ;
 int c;
-while ((c = getc(fp)) != EOF) if( c == '\n' ) numOfLines++;
+while ((c = getc(fp)) != EOF) 
+if( c == '\n' ) numOfLines++;
 fclose(fp);
 //#############
 FILE* ff;
