@@ -14,7 +14,8 @@ struct Taxi {
     float minCharge;
     char state; // 'A' for available, 'R' for in a ride
     struct Taxi* next; // Self-referential 
-};
+
+}*list; //  a pointer to a linked list of struct Taxi
 
 
 
@@ -62,13 +63,14 @@ fclose(ff);
 void setTripCar(char *category , float *rate) {
 if( list == NULL)
 {
-printf("empty list\n"); return ;
+printf("empty list\n");
+ return ;
 }
-struct Taxi *current  ;
-current = list ;
+
+struct Taxi *current = list ;
+
 while( current != NULL){
-if( strcmp( current->category , category ) == 0 && current->rate
-== *rate) {
+if( strcmp( current->category , category ) == 0 && current->rate == *rate) {
 current->state = 'R' ;
 return ; // out of method ( because we want to set first one only)
 }
@@ -91,27 +93,30 @@ current = current->next ;
 
 
 int main() {
-    // Declare a pointer to a linked list of struct Taxi
-    struct Taxi* list = NULL;  // an empty list
+   
 
-    // Assign the first node to the list سويته عشان ما ننسى بس مافيه نود اصلا
-    list = &taxi1; 
+    
 
     // Call the function addTripCar to read the content  of the given text file: “Taxies.txt”, 
-    addTripCar(&list, "Taxies.txt");
+    addTripCar();
+     printf("The Available Trip cars:\n");
+    printList();
+    printf("--------------------------------------------------------------------------------------------------------------\n");
 
+    int i;
     // Call the function setTripCar with the given information
-    setTripCar(list, "Business", 4.5);
-    setTripCar(list, "Family", 5.0);
-    setTripCar(list, "Family", 4.0);
-    setTripCar(list, "standard", 3.4);
-    setTripCar(list, "standard", 5.0);
+    char *Categorys[]={"Business","Family","Family","standard","standard"};
+    float rates[] = {4.5,5.0,4.0,3.4,5.0};
+    for( i = 0 ; i < 5 ; i++)
+        setTripCar(*(Categorys+i),(rates+i));
 
     // Call the function writeCarsInRide to update the txt file with cars in trip.
-    writeCarsInRide(&list, "Taxies.txt");
+    char *fileName ="Taxies.txt";
+    writeCarsInRide(fileName);
 
     // Call the function printList to print the cars information
-    printList(list);
+    printf("The Cars in Ride:\n");
+    printList();
 
     
     return 0;
