@@ -61,6 +61,7 @@ list = head ;
 fclose(ff);
 
 }
+
 //______________________________________________________________________
 
 
@@ -83,6 +84,7 @@ current = current->next ;
 }
 
 }
+
 //______________________________________________________________________
 
 
@@ -156,7 +158,7 @@ int main() {
     setTripCar(*(Categorys+i),(rates+i));
 
     // Call the function writeCarsInRide to update the txt file with cars in trip.
-    char *fileName ="Taxies.txt";
+    char *fileName = "Taxies.txt";
     writeCarsInRide(fileName);
 
     // Call the function printList to print the cars information
