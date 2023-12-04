@@ -13,7 +13,9 @@ struct Taxi {
     struct Taxi* next; // Self-referential 
 };
 
-struct Taxi *list = NULL ;
+
+
+//void addTripCar() 1
 void addTripCar(){
 struct Taxi *head = NULL , *current ; FILE* fp;
 fp = fopen("Taxies.txt", "r");
@@ -31,7 +33,8 @@ int cc;
 while ((cc = getc(ff)) != '\n');// to ignore the header line in file
 int i ;
 for( i=0;i<numOfLines-1;i++){
-struct Taxi *temp = (struct Taxi *) malloc(sizeof(struct Taxi)); fscanf(ff, "%d %s %s %s %s %f %f ", &(temp->id) , temp->driver , temp->category , temp->plate , temp->color , &(temp->rate) , &(temp- >minCharge) );
+struct Taxi *temp = (struct Taxi*) malloc(sizeof(struct Taxi));
+ fscanf(ff, "%d %s %s %s %s %f %f ", &(temp->id) , temp->driver , temp->category , temp->plate , temp->color , &(temp->rate) , &(temp->minCharge) );
 temp->state = 'A' ;
 temp->next = NULL;
 if( head == NULL)
@@ -46,7 +49,10 @@ current->next = temp ; current = current->next ; }
 list = head ;
 fclose(ff);
 }
-//###########
+//______________________________________________________________________
+
+
+//void setTripCar (char* category, float* rate) 2
 void setTripCar(char *category , float *rate) {
 if( list == NULL)
 {
@@ -64,14 +70,19 @@ current = current->next ;
 }
 
 }
+//______________________________________________________________________
 
-//void addTripCar() 1
-
-//void setTripCar (char* category, float* rate) 2
 
 //void writeCarsInRide (char* fileName) 3
 
+//______________________________________________________________________
+
+
 //printList() 4
+
+//______________________________________________________________________
+
+
 
 int main() {
     // Declare a pointer to a linked list of struct Taxi
