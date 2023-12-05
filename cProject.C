@@ -20,47 +20,66 @@ struct Taxi {
 
 
 //void addTripCar() 1
-void addTripCar(){
+void addTripCar() {
+    struct Taxi *head = NULL, *current;
+    FILE *fp;
 
-struct Taxi *head = NULL , *current ; 
-FILE* fp;
-fp = fopen("Taxies.txt", "r");
-if( fp == NULL)
-//perror("Error opening file\n");
-return ;
-int numOfLines = 0 ;
-int c;
-while ((c = getc(fp)) != EOF) 
-if( c == '\n' ) numOfLines++;
-fclose(fp);
+    fp = fopen("Taxies.txt", "r");
+    if (fp == NULL) {
+        perror("Error opening file\n");
+        return;
+    }
 
-//#############
+    int numOfLines = 0;
+    int c;
+    while ((c = getc(fp)) != EOF)
+        if (c == '\n')
+            numOfLines++;
+    fclose(fp);
 
-FILE* ff;
-ff = fopen("Taxies.txt", "r"); if( ff == NULL)
-return ;
-int cc;
-while ((cc = getc(ff)) != '\n');// to ignore the header line in file
-int i ;
-for( i=0;i<numOfLines-1;i++){
-struct Taxi *temp = (struct Taxi*) malloc(sizeof(struct Taxi));
- fscanf(ff, "%d %s %s %s %s %f %f ", &(temp->id) , temp->driver , temp->category , temp->plate , temp->color , &(temp->rate) , &(temp->minCharge) );
-temp->state = 'A' ;
-temp->next = NULL;
-if( head == NULL)
-{
-head = temp ;
-current = head ;
+    FILE *ff;
+    ff = fopen("Taxies.txt", "r");
+    if (ff == NULL) {
+        perror("Error opening file\n");
+        return;
+    }
+
+    int cc;
+    while ((cc = getc(ff)) != '\n'); // to ignore the header line in file
+    int i;
+    for (i = 0; i < numOfLines - 1; i++) {
+        struct Taxi *temp = (struct Taxi *)malloc(sizeof(struct Taxi));
+        if (temp == NULL) {
+            perror("Memory allocation failed\n");
+            fclose(ff);
+
+            // Free the previously allocated memory before returning
+            struct Taxi *current = head;
+            while (current != NULL) {
+                struct Taxi *next = current->next;
+                free(current);
+                current = next;
+            }
+
+            return;
+        }
+        fscanf(ff, "%d %s %s %s %s %f %f ", &(temp->id), temp->driver, temp->category, temp->plate, temp->color, &(temp->rate), &(temp->minCharge));
+        temp->state = 'A';
+        temp->next = NULL;
+        if (head == NULL) {
+            head = temp;
+            current = head;
+        } else {
+            current->next = temp;
+            current = current->next;
+        }
+    }
+
+    list = head;
+    fclose(ff);
 }
-else
-{
-current->next = temp ; current = current->next ; }
-}// end for
 
-list = head ;
-fclose(ff);
 
-}
 
 //______________________________________________________________________
 
@@ -146,11 +165,12 @@ int main() {
 
     // Call the function addTripCar to read the content  of the given text file: “Taxies.txt”, 
     addTripCar();
+    int i;
     printf("The Available Trip cars:\n");
     printList();
     printf("--------------------------------------------------------------------------------------------------------------\n");
 
-    int i;
+    
     // Call the function setTripCar with the given information
     char *Categorys[]={"Business","Family","Family","standard","standard"};
     float rates[] = {4.5,5.0,4.0,3.4,5.0};

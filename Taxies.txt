@@ -19,3 +19,11 @@ id 	driver	category	plate 	rate	state
 222	Hamad 	Family  	ABC111	5.0	R
 444	Saad  	standard	BBE222	3.4	R
 666	Maha  	standard	ABC555	5.0	R
+
+--------------------------------------------------------------------------------------------------------------
+The Car in Ride:
+id 	driver	category	plate 	rate	state
+111	Ali   	Business	WED500	4.5	R
+222	Hamad 	Family  	ABC111	5.0	R
+444	Saad  	standard	BBE222	3.4	R
+666	Maha  	standard	ABC555	5.0	R
