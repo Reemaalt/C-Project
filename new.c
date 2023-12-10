@@ -11,13 +11,11 @@ struct Taxi {
     char plate[7];
     char color[20];
     float rate;
-    float minCharge;
+    float minCharge; 
     char state; // 'A' for available, 'R' for in a ride
     struct Taxi* next; // Self-referential 
 
 }*list; //  a pointer to a linked list of struct Taxi
-
-
 
 //void addTripCar() 1
 void addTripCar() {
